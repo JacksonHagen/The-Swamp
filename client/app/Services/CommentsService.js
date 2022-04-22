@@ -17,7 +17,7 @@ class CommentsService {
   }
 
   async vote(id, newVote) {
-    await api.post('api/comments/' + id + this.vote, newVote)
+    await api.post('api/comments/' + id + '/vote', newVote)
     ProxyState.comments = ProxyState.comments
   }
 
