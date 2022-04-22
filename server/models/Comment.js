@@ -19,7 +19,8 @@ CommentSchema.virtual('account',
     foreignField: '_id',
     ref: 'Account',
     justOne: true
-  })
+  }
+)
 
 CommentSchema.virtual('post',
   {
@@ -27,4 +28,15 @@ CommentSchema.virtual('post',
     foreignField: '_id',
     ref: 'Post',
     justOne: true
-  })
+  }
+)
+
+// TODO figure out how to only populate the votes the user has made on this comment
+CommentSchema.virtual("info", 
+    {
+        localField: "",
+        ref: "CommentLayer",
+        foreignField: "",
+        justOne: true
+    }
+)
