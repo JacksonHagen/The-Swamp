@@ -3,11 +3,11 @@ import { BadRequest, Forbidden } from '../utils/Errors.js'
 
 class PostsService {
   async getAll() {
-    return await dbContext.Posts.find({})
+    return await dbContext.Posts.find({}).populate("account", "name picture")
   }
 
   async getById(id) {
-    const found = await dbContext.Posts.findById(id)
+    const found = await dbContext.Posts.findById(id).populate("account", "name picture")
     if (!found) {
       throw new BadRequest('Unable to find that post')
     }
@@ -16,6 +16,7 @@ class PostsService {
 
   async create(body) {
     const newPost = await dbContext.Posts.create(body)
+    newPost.populate("account", "name picture")
     return newPost
   }
 
@@ -27,6 +28,7 @@ class PostsService {
     editedPost.title = body.title || editedPost.title
     editedPost.body = body.body || editedPost.body
     editedPost.save()
+    editedPost.populate("account", "name picture")
     return editedPost
   }
 

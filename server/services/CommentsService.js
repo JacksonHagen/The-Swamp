@@ -30,6 +30,12 @@ class CommentsService {
     await dbContext.Comments.findByIdAndDelete(id)
     return comment
   }
+
+  async getByPostId(postId)
+  {
+      const found = await dbContext.Comments.find({postId: postId}).populate("account", "name picture")
+      return found
+  }
 }
 
 export const commentsService = new CommentsService()

@@ -1,4 +1,5 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
+import { commentsLayersService } from '../services/CommentsLayersService.js'
 import { commentsService } from '../services/CommentsService.js'
 import BaseController from '../utils/BaseController.js'
 
@@ -9,6 +10,7 @@ export class CommentsController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.create)
+      .post('/:id/vote', this.vote)
       .put('/:id', this.edit)
       .delete('/:id', this.remove)
   }
@@ -38,5 +40,17 @@ export class CommentsController extends BaseController {
     } catch (error) {
       next(error)
     }
+  }
+
+  async vote(req, res, next)
+  {
+     try
+     {
+         return res.send(await commentsLayersService.create(req.body));
+     }
+     catch(error)
+     {
+         next(error);
+     }
   }
 }
