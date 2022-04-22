@@ -5,7 +5,7 @@ export const PostSchema = new Schema(
   {
     title: { type: String, required: true },
     body: { type: String },
-    imageUrl: { type: URL },
+    imageUrl: { type: String },
     accountId: { type: Schema.Types.ObjectId, required: true }
   },
   {

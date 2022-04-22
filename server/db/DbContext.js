@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 import { AccountSchema, ProfileSchema } from '../models/Account'
 import { ValueSchema } from '../models/Value'
-import { PostSchema } from "../models/Post.js"
-import { CommentSchema } from '../models/Comment.js';
+import { PostSchema } from '../models/Post.js'
+import { CommentSchema } from '../models/Comment.js'
 
 class DbContext {
   Values = mongoose.model('Value', ValueSchema);
