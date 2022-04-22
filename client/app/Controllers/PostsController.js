@@ -1,4 +1,5 @@
 import { ProxyState } from '../AppState.js'
+import { commentsService } from '../Services/CommentsService.js'
 import { postsService } from '../Services/PostsService.js'
 import { logger } from '../Utils/Logger.js'
 
@@ -8,9 +9,20 @@ function _drawPosts() {
   ProxyState.posts.forEach(p => template += p.Template)
   document.getElementById('posts').innerHTML = template
 }
+
+function _drawActivePost()
+{
+    if(activePost !== null)
+    {
+        document.getElementById("active-post-body").innerHTML = ProxyState.activePost.activeTemplate;
+        document.getElementById("active-post-title").innerText = ProxyState.activePost.title;
+    }
+}
+
 export class PostsController {
   constructor() {
     ProxyState.on('posts', _drawPosts)
+    ProxyState.on('activePost', _drawActivePost)
     _drawPosts()
   }
 
@@ -22,17 +34,30 @@ export class PostsController {
     }
   }
 
-  async upLayer(postId) {
+  async setActivePost(postId)
+  {
+      try
+      {
+          postsService.setActivePost(postId);   
+          commentsService.getCommentsByPostId(ProxyState.activePost.id); 
+      }
+      catch(error)
+      {
+          logger.error("[SET ACTIVE POST]" + error.message);
+      }
+  }
+
+  async upVote(postId) {
     try {
-      await postsService.upLayer(postId)
+      await postsService.upVote(postId)
     } catch (error) {
       logger.error(error)
     }
   }
 
-  async downLayer(postId) {
+  async downVote(postId) {
     try {
-      await postsService.downLayer(postId)
+      await postsService.downVote(postId)
     } catch (error) {
       logger.error(error)
     }

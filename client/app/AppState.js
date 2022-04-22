@@ -14,6 +14,10 @@ class AppState extends EventEmitter {
   users = []
   /** @type {import('./Models/Post').Post[]} */
   posts = [post1]
+
+  activePost = null;
+
+  comments = [];
 }
 
 export const ProxyState = new Proxy(new AppState(), {
