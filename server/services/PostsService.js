@@ -20,7 +20,7 @@ class PostsService {
   }
 
   async edit(body) {
-    const editedPost = this.getById(body.id)
+    const editedPost = await this.getById(body.id)
     if (editedPost.accountId.toString() !== body.accountId) {
       throw new Forbidden("User didn't make this post.")
     }
