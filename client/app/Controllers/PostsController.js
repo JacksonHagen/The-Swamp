@@ -49,23 +49,19 @@ export class PostsController {
     }
   }
 
-  async newPost()
-  {
-      try
-      {
-        window.event.preventDefault();
-        const form = window.event.target;
-        const newPostData = {
-            title: form.title,
-            body: form.body,
-            imageUrl: form.imageUrl
-        };
+  async newPost() {
+    try {
+      window.event.preventDefault()
+      const form = window.event.target
+      const newPostData = {
+        title: form.title,
+        body: form.body,
+        imageUrl: form.imageUrl
+      }
 
-        await postsService.createPost(newPostData);
-      }
-      catch(error)
-      {
-          console.error("[NEW POST]", error.message);
-      }
+      await postsService.createPost(newPostData)
+    } catch (error) {
+      console.error('[NEW POST]', error.message)
+    }
   }
 }
