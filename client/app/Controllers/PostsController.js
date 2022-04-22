@@ -41,19 +41,31 @@ export class PostsController {
     }
   }
 
-  async upVote(postId) {
+  async vote(postId, userVote) {
     try {
-      await postsService.upVote(postId)
+      await postsService.vote(postId, userVote)
     } catch (error) {
       logger.error(error)
     }
   }
 
-  async downVote(postId) {
-    try {
-      await postsService.downVote(postId)
-    } catch (error) {
-      logger.error(error)
-    }
+  async newPost()
+  {
+      try
+      {
+        window.event.preventDefault();
+        const form = window.event.target;
+        const newPostData = {
+            title: form.title,
+            body: form.body,
+            imageUrl: form.imageUrl
+        };
+
+        await postsService.createPost(newPostData);
+      }
+      catch(error)
+      {
+          console.error("[NEW POST]", error.message);
+      }
   }
 }

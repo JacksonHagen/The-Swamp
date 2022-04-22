@@ -4,13 +4,8 @@ import { logger } from '../Utils/Logger.js'
 import { api } from './AxiosService.js'
 
 class PostsService {
-  async upVote(postId) {
-    const res = await api.post('api/posts/' + postId + '/vote', { upvoted: true })
-    logger.log(res.data)
-  }
-
-  async downVote(postId) {
-    const res = await api.post('api/posts/' + postId + '/vote', { upvoted: true })
+  async vote(postId, userVote) {
+    const res = await api.post('api/posts/' + postId + '/vote', { userVote })
     logger.log(res.data)
   }
 
@@ -22,6 +17,12 @@ class PostsService {
 
   setActivePost(postId) {
     ProxyState.activePost = ProxyState.posts.find(post => post.postId === postId)
+  }
+
+  async createPost(newPostData)
+  {
+    const res = await api.post("api/posts", newPostData);
+    ProxyState.posts = [new Post(res.data), ...ProxyState.posts];
   }
 }
 
