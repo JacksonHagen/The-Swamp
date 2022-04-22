@@ -54,9 +54,9 @@ export class PostsController {
       window.event.preventDefault()
       const form = window.event.target
       const newPostData = {
-        title: form.title,
-        body: form.body,
-        imageUrl: form.imageUrl
+        title: form.title.value,
+        body: form.body.value,
+        imageUrl: form.imageUrl.value
       }
 
       await postsService.createPost(newPostData)
