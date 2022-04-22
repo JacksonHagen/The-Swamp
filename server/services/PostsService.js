@@ -1,5 +1,5 @@
 import { dbContext } from '../db/DbContext.js'
-import { BadRequest } from '../utils/Errors.js'
+import { BadRequest, Forbidden } from '../utils/Errors.js'
 
 class PostsService {
   async getAll() {
@@ -21,11 +21,25 @@ class PostsService {
 
   async edit(body) {
     const editedPost = this.getById(body.id)
-    if(editedPost.accountId.toString())
+    if(editedPost.accountId.toString() !== body.accountId)
+    {
+        throw new Forbidden("User didn't make this post.");
+    }
+    editedPost.title = body.title || editedPost.title  
+    editedPost.body = body.body || editedPost.body  
+    editedPost.save()
+    return editedPost
+
   }
 
-  async remove(id) {
-    throw new Error('Method not implemented.')
+  async remove(id, userId) {
+    const removed = await this.getById(id)
+    if(removed.accountId.toString() !== userId)
+    {
+        throw new Forbidden("User didn't make this post.");
+    }
+    removed.remove()
+    return removed
   }
 }
 

@@ -55,10 +55,12 @@ export class PostsController extends BaseController {
 
   async remove(req, res, next) {
     try {
-      const removedPost = await postsService.remove(req.params.id)
+      const removedPost = await postsService.remove(req.params.id, req.userInfo.id)
       res.send(removedPost)
     } catch (error) {
       next(error)
     }
+
+    // TODO add votesService.getScore
   }
 }
