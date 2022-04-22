@@ -12,8 +12,8 @@ function _drawPosts() {
 
 function _drawActivePost() {
   if (ProxyState.activePost !== null) {
-    document.getElementById("active-post-body").innerHTML = ProxyState.activePost.activeTemplate;
-    document.getElementById("active-post-title").innerText = ProxyState.activePost.title;
+    document.getElementById('active-post-body').innerHTML = ProxyState.activePost.activeTemplate
+    document.getElementById('active-post-title').innerText = ProxyState.activePost.title
   }
 }
 
@@ -34,11 +34,10 @@ export class PostsController {
 
   async setActivePost(postId) {
     try {
-      postsService.setActivePost(postId);
-      commentsService.getCommentsByPostId(ProxyState.activePost.id);
-    }
-    catch (error) {
-      logger.error("[SET ACTIVE POST]" + error.message);
+      postsService.setActivePost(postId)
+      commentsService.getCommentsByPostId(ProxyState.activePost.postId)
+    } catch (error) {
+      logger.error('[SET ACTIVE POST]' + error.message)
     }
   }
 

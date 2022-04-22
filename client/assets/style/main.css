@@ -14773,4 +14773,12 @@ main {
   object-fit: cover;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
+.fit {
+  width: fit-content;
+}
+
 /*# sourceMappingURL=main.css.map */

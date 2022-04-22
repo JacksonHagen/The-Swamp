@@ -5,13 +5,12 @@ import { api } from './AxiosService.js'
 
 class PostsService {
   async upVote(postId) {
-    const res = await api.post('api/posts/' + postId + '/vote', {upvoted: true})
+    const res = await api.post('api/posts/' + postId + '/vote', { upvoted: true })
     logger.log(res.data)
-
   }
 
   async downVote(postId) {
-    const res = await api.post('api/posts/' + postId + '/vote', {upvoted: true})
+    const res = await api.post('api/posts/' + postId + '/vote', { upvoted: true })
     logger.log(res.data)
   }
 
@@ -21,9 +20,8 @@ class PostsService {
     ProxyState.posts = res.data.map(p => new Post(p))
   }
 
-  setActivePost(postId)
-  {
-      ProxyState.activePost = ProxyState.posts.find(post => post.id === postId)
+  setActivePost(postId) {
+    ProxyState.activePost = ProxyState.posts.find(post => post.postId === postId)
   }
 }
 
