@@ -18,8 +18,10 @@ export class Post {
           <div class="card-body">
             <h5 class="card-title">${this.title}</h5>
             <p class="card-text">${this.body}</p>
-            <button class="btn btn-primary" onclick="app.postsController.upVote(${this.postId})">Uplayer</button>
-            <button class="btn btn-warning" onclick="app.postsController.downVote(${this.postId})">Downlayer</button>
+            <button class="btn btn-primary" onclick="app.postsController.vote(${this.postId}, true)">Uplayer</button>
+            <button class="btn btn-warning" onclick="app.postsController.vote(${this.postId}, false)">Downlayer</button>
+            <button class="btn btn-primary" onclick="app.postsController.edit(${this.postId})">Edit</button>
+            <button class="btn btn-warning" onclick="app.postsController.remove(${this.postId})">Remove</button>
           </div>
         </div>
       </div>
@@ -27,9 +29,8 @@ export class Post {
     `
   }
 
-  get activeTemplate()
-  {
-      return "<span>TODO make an active template</span>"
+  get activeTemplate() {
+    return "<span>TODO make an active template</span>"
   }
 
   addLayer() {

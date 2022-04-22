@@ -10,13 +10,11 @@ function _drawPosts() {
   document.getElementById('posts').innerHTML = template
 }
 
-function _drawActivePost()
-{
-    if(activePost !== null)
-    {
-        document.getElementById("active-post-body").innerHTML = ProxyState.activePost.activeTemplate;
-        document.getElementById("active-post-title").innerText = ProxyState.activePost.title;
-    }
+function _drawActivePost() {
+  if (ProxyState.activePost !== null) {
+    document.getElementById("active-post-body").innerHTML = ProxyState.activePost.activeTemplate;
+    document.getElementById("active-post-title").innerText = ProxyState.activePost.title;
+  }
 }
 
 export class PostsController {
@@ -34,17 +32,14 @@ export class PostsController {
     }
   }
 
-  async setActivePost(postId)
-  {
-      try
-      {
-          postsService.setActivePost(postId);   
-          commentsService.getCommentsByPostId(ProxyState.activePost.id); 
-      }
-      catch(error)
-      {
-          logger.error("[SET ACTIVE POST]" + error.message);
-      }
+  async setActivePost(postId) {
+    try {
+      postsService.setActivePost(postId);
+      commentsService.getCommentsByPostId(ProxyState.activePost.id);
+    }
+    catch (error) {
+      logger.error("[SET ACTIVE POST]" + error.message);
+    }
   }
 
   async upVote(postId) {
