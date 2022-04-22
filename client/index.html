@@ -20,8 +20,11 @@
           loading="lazy">
         <span class="ml-2">theSwamp</span>
       </a>
-      <form onsubmit="app.postsController.newPost()">
-        
+      <form class="card p-3 bg-light" onsubmit="app.postsController.newPost()">
+        <input class="form-control" type="text" id="title" placeholder="Give your post a title">
+        <input class="form-control" type="text" name="" id="imageUrl" placeholder="Paste Image Link Here">
+        <input class="form-control" type="text" id="body" placeholder="body">
+        <button class="btn btn-primary">Submit Post</button>
       </form>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +39,7 @@
     </nav>
   </header>
   <main class="container-fluid" id="posts">
-    
+
   </main>
 
   <div class="modal" tabindex="-1">
@@ -47,13 +50,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div id="active-post-body"></div>
-            <div id="active-post-comments"></div>
+          <div id="active-post-body"></div>
+          <div id="active-post-comments"></div>
         </div>
       </div>
     </div>
   </div>
-  
+
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.auth0.com/js/auth0-spa-js/1.15/auth0-spa-js.production.js"></script>
