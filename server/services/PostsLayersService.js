@@ -32,7 +32,7 @@ class PostsLayersService
         }
 
         // NOTE have to check like this because it's a bool, so just checking against it would skip it if it was false
-        edited.upvoted = typeof update.upvoted != "boolean" ? update.upvoted : edited.upvoted
+        edited.upvoted = typeof update.upvoted == "boolean" ? update.upvoted : edited.upvoted
         edited.save()
         return edited
     }

@@ -14,6 +14,7 @@ export class PostsController extends BaseController {
       .get('/:id/comments', this.getCommentsByPostId)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.create)
+      .post('/:id/vote', this.vote)
       .put('/:id', this.edit)
       .delete('/:id', this.remove)
   }
@@ -64,13 +65,23 @@ export class PostsController extends BaseController {
     } catch (error) {
       next(error)
     }
-    // TODO add votesService.getScore
   }
 
   async getCommentsByPostId(req, res, next) {
     try {
       const comments = await commentsService.getByPostId(req.params.id)
       return res.send(comments)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async vote(req, res, next)
+  {
+    try {
+        req.body.commentId = req.params.id
+        req.body.accountId = req.userInfo.id
+      return res.send(await postsLayersService.create(req.body))
     } catch (error) {
       next(error)
     }
