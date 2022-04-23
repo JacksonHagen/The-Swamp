@@ -58,11 +58,16 @@ export class PostsController {
     }
   }
 
-  async edit(postId) {
+  // NOTE basically just a 'setActivePost' function, but it doesnt get the comments
+  async editButton(postId) {
+    postsService.setActivePost(postId)
+  }
+
+  async edit() {
     try {
-      postsService.edit(postId)
+      window.event.preventDefault()
     } catch (error) {
-      logger.error('[EDIT_ERROR]', error)
+
     }
   }
 
