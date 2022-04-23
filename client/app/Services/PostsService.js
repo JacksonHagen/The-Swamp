@@ -4,6 +4,14 @@ import { logger } from '../Utils/Logger.js'
 import { api } from './AxiosService.js'
 
 class PostsService {
+  async edit(postId) {
+    await api.put('api/posts/' + postId)
+    const index = ProxyState.posts.findIndex(p => p.id === postId)
+    ProxyState.posts.splice(index, 1)
+    // eslint-disable-next-line no-self-assign
+    ProxyState.posts = ProxyState.posts
+  }
+
   async remove(postId) {
     const res = await api.delete('api/posts/' + postId)
     logger.log(res.data)

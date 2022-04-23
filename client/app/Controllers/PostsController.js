@@ -59,7 +59,11 @@ export class PostsController {
   }
 
   async edit(postId) {
-
+    try {
+      postsService.edit(postId)
+    } catch (error) {
+      logger.error('[EDIT_ERROR]', error)
+    }
   }
 
   async newPost() {
