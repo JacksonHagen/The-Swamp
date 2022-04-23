@@ -65,16 +65,12 @@ export class PostsController extends BaseController {
     // TODO add votesService.getScore
   }
 
-  async getCommentsByPostId(req, res, next)
-  {
-     try
-     {
-         const comments = await commentsService.getByPostId(req.params.id)
-         return res.send(comments);
-     }
-     catch(error)
-     {
-         next(error);
-     }
+  async getCommentsByPostId(req, res, next) {
+    try {
+      const comments = await commentsService.getByPostId(req.params.id)
+      return res.send(comments)
+    } catch (error) {
+      next(error)
+    }
   }
 }

@@ -42,15 +42,11 @@ export class CommentsController extends BaseController {
     }
   }
 
-  async vote(req, res, next)
-  {
-     try
-     {
-         return res.send(await commentsLayersService.create(req.body));
-     }
-     catch(error)
-     {
-         next(error);
-     }
+  async vote(req, res, next) {
+    try {
+      return res.send(await commentsLayersService.create(req.body))
+    } catch (error) {
+      next(error)
+    }
   }
 }
