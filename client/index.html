@@ -20,13 +20,7 @@
           loading="lazy">
         <span class="ml-2">The Swamp</span>
       </a>
-      <form class="card p-4 bg-light justify-content-center align-items-center"
-        onsubmit="app.postsController.newPost()">
-        <input class="form-control m-2" type="text" id="title" placeholder="Give your post a title">
-        <input class="form-control m-2" type="text" name="" id="imageUrl" placeholder="Paste Image Link Here">
-        <input class="form-control m-2" type="text" id="body" placeholder="body">
-        <button class="btn btn-primary">Submit Post</button>
-      </form>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -34,6 +28,8 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <!-- NAVLINKS -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#createModal">Create</button>
         </div>
       </div>
       <div class="flex-grow-1 justify-content-end align-items-center d-flex" id="authstate"></div>
@@ -57,7 +53,20 @@
       </div>
     </div>
   </div>
-
+  <div class="modal fade align-items-center" tabindex="-1" id="createModal">
+    <div class="modal-dialog">
+      <div class="modal-content bg-light p-3">
+        <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <form class="card border-0 p-4 bg-light justify-content-center align-items-center rounded-bottom rounded-top-0"
+          onsubmit="app.postsController.newPost()">
+          <input class="form-control m-2" type="text" id="title" placeholder="Give your post a title">
+          <input class="form-control m-2" type="text" name="" id="imageUrl" placeholder="Paste Image Link Here">
+          <input class="form-control m-2" type="text" id="body" placeholder="body">
+          <button class="btn btn-primary">Submit Post</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.auth0.com/js/auth0-spa-js/1.15/auth0-spa-js.production.js"></script>
