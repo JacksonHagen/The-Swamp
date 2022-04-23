@@ -18,8 +18,8 @@ export class PostsController extends BaseController {
 
   async getAll(req, res, next) {
     try {
-      const allPosts = await postsService.getAll()
-      res.send(allPosts)
+      const posts = await postsService.getAll()
+      res.send(posts)
     } catch (error) {
       next(error)
     }
