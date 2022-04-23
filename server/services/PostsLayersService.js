@@ -32,7 +32,7 @@ class PostsLayersService
         }
 
         // NOTE have to check like this because it's a bool, so just checking against it would skip it if it was false
-        edited.upvoted = typeof update.upvoted == "boolean" ? update.upvoted : edited.upvoted
+        edited.userVote = typeof update.userVote == "boolean" ? update.userVote : edited.upvoted
         edited.save()
         return edited
     }
@@ -52,7 +52,7 @@ class PostsLayersService
     {
         const votes = await this.getAll({ postId });
         let score = votes.length;
-        score += votes.filter(vote => vote.upvoted).length * 2
+        score += votes.filter(vote => vote.userVote).length * 2
         return score
     }
 }
