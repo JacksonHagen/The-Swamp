@@ -66,8 +66,15 @@ export class PostsController {
   async edit() {
     try {
       window.event.preventDefault()
+      const form = window.event.target
+      const formData = {
+        title: form.editTitle.value,
+        imageUrl: form.editImageUrl.value,
+        body: form.editBody.value
+      }
+      postsService.edit(formData)
     } catch (error) {
-
+      logger.error('[EDIT_FORM_Error]', error)
     }
   }
 

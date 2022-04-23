@@ -20,7 +20,7 @@ export class Post {
             <p class="card-text">${this.body}</p>
             <button class="btn btn-primary" onclick="app.postsController.vote('${this.id}', true)">Uplayer</button>
             <button class="btn btn-warning" onclick="app.postsController.vote('${this.id}', false)">Downlayer</button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data.bs-target="#editModal" onclick="app.postsController.editButton(${this.id})">Edit</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" onclick="app.postsController.editButton(${this.id})">Edit</button>
             <button class="btn btn-danger" onclick="app.postsController.remove('${this.id}')">Remove</button>
           </div>
         </div>
