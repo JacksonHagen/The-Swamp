@@ -2,6 +2,7 @@ import { ProxyState } from '../AppState.js'
 import { commentsService } from '../Services/CommentsService.js'
 import { postsService } from '../Services/PostsService.js'
 import { logger } from '../Utils/Logger.js'
+import { Pop } from '../Utils/Pop.js'
 
 function _drawPosts() {
   let template = ''
@@ -54,6 +55,9 @@ export class PostsController {
     try {
       postsService.remove(postId)
     } catch (error) {
+      const audio = new Audio('../assets/swampAudio.mp3')
+      audio.play()
+      Pop.toast('WHAT ARE YEOU DOIN IN ME SWAMP', 'error', 'center')
       logger.error('[REMOVAL_ERROR]', error)
     }
   }
@@ -76,9 +80,12 @@ export class PostsController {
         imageUrl: form.editImageUrl.value,
         body: form.editBody.value
       }
-      postsService.edit(formData)
+      await postsService.edit(formData)
       form.reset()
     } catch (error) {
+      const audio = new Audio('../assets/swampAudio.mp3')
+      audio.play()
+      Pop.toast('WHAT ARE YEOU DOIN IN ME SWAMP', 'error', 'center')
       logger.error('[EDIT_FORM_Error]', error)
     }
   }
