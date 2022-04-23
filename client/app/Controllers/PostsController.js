@@ -2,6 +2,7 @@ import { ProxyState } from '../AppState.js'
 import { commentsService } from '../Services/CommentsService.js'
 import { postsService } from '../Services/PostsService.js'
 import { logger } from '../Utils/Logger.js'
+import { Pop } from '../Utils/Pop.js'
 
 function _drawPosts() {
   let template = ''
@@ -52,8 +53,11 @@ export class PostsController {
 
   async remove(postId) {
     try {
-      postsService.remove(postId)
+      await postsService.remove(postId)
     } catch (error) {
+      const audio = new Audio('../assets/swampAudio.mp3')
+      audio.play()
+      Pop.toast('WHAT ARE YEOU DOIN IN ME SWAMP', 'error', 'center', 5300)
       logger.error('[REMOVAL_ERROR]', error)
     }
   }
@@ -61,13 +65,28 @@ export class PostsController {
   // NOTE basically just a 'setActivePost' function, but it doesnt get the comments
   async editButton(postId) {
     postsService.setActivePost(postId)
+    const activePost = ProxyState.activePost
+    document.getElementById('editTitle').value = activePost.title
+    document.getElementById('editImageUrl').value = activePost.imageUrl
+    document.getElementById('editBody').value = activePost.body
   }
 
   async edit() {
     try {
       window.event.preventDefault()
+      const form = window.event.target
+      const formData = {
+        title: form.editTitle.value,
+        imageUrl: form.editImageUrl.value,
+        body: form.editBody.value
+      }
+      await postsService.edit(formData)
+      form.reset()
     } catch (error) {
-
+      const audio = new Audio('../assets/swampAudio.mp3')
+      audio.play()
+      Pop.toast('WHAT ARE YEOU DOIN IN ME SWAMP', 'error', 'center', 5300)
+      logger.error('[EDIT_FORM_Error]', error)
     }
   }
 
@@ -82,6 +101,7 @@ export class PostsController {
       }
 
       await postsService.createPost(newPostData)
+      form.reset()
     } catch (error) {
       console.error('[NEW POST]', error.message)
     }

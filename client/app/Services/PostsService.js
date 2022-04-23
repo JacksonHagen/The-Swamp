@@ -4,10 +4,14 @@ import { logger } from '../Utils/Logger.js'
 import { api } from './AxiosService.js'
 
 class PostsService {
-  async edit(postId) {
-    await api.put('api/posts/' + postId)
-    const index = ProxyState.posts.findIndex(p => p.id === postId)
-    ProxyState.posts.splice(index, 1)
+  async edit(formData) {
+    const post = ProxyState.activePost
+    await api.put('api/posts/' + post.id, formData)
+    post.title = formData.title
+    post.imageUrl = formData.imageUrl
+    post.body = formData.body
+    const index = ProxyState.posts.findIndex(p => p.id === post.id)
+    ProxyState.posts.splice(index, 1, post)
     // eslint-disable-next-line no-self-assign
     ProxyState.posts = ProxyState.posts
   }

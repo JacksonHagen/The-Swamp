@@ -1,5 +1,4 @@
 export class Pop {
-
   /**
    * @typedef {{message: string, response:{ data: any}}} AxiosError
    */
@@ -54,12 +53,13 @@ export class Pop {
       showConfirmButton: false
     })
   }
+
   /**
    * @param {Error | AxiosError} error Handles thrown errors and will unwrap Axios errors.
    */
   static error(error) {
     // @ts-ignore
-    let message = error.response?.data || error.message
+    const message = error.response?.data || error.message
     Pop.toast(message, 'error')
   }
 }
