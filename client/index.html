@@ -54,7 +54,7 @@
     </div>
   </div>
   <div class="modal fade align-items-center" tabindex="-1" id="createModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog-centered">
       <div class="modal-content bg-light p-3">
         <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         <form class="card border-0 p-4 bg-light justify-content-center align-items-center rounded-bottom rounded-top-0"
@@ -63,6 +63,21 @@
           <input class="form-control m-2" type="text" name="" id="imageUrl" placeholder="Paste Image Link Here">
           <input class="form-control m-2" type="text" id="body" placeholder="body">
           <button class="btn btn-primary">Submit Post</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade align-items-center" tabindex="-1" id="editModal">
+    <div class="modal-dialog-centered">
+      <div class="modal-content bg-light p-3">
+        <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <form class="card border-0 p-4 bg-light justify-content-center align-items-center rounded-bottom rounded-top-0"
+          onsubmit="app.postsController.edit()">
+          <input class="form-control m-2" type="text" id="editTitle" placeholder="Give your post a title">
+          <input class="form-control m-2" type="text" name="" id="editImageUrl" placeholder="Paste Image Link Here">
+          <input class="form-control m-2" type="text" id="editBody" placeholder="body">
+          <button class="btn btn-primary">Submit Edit</button>
         </form>
       </div>
     </div>
