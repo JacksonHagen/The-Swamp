@@ -61,6 +61,10 @@ export class PostsController {
   // NOTE basically just a 'setActivePost' function, but it doesnt get the comments
   async editButton(postId) {
     postsService.setActivePost(postId)
+    const activePost = ProxyState.activePost
+    document.getElementById('editTitle').value = activePost.title
+    document.getElementById('editImageUrl').value = activePost.imageUrl
+    document.getElementById('editBody').value = activePost.body
   }
 
   async edit() {
@@ -73,6 +77,7 @@ export class PostsController {
         body: form.editBody.value
       }
       postsService.edit(formData)
+      form.reset()
     } catch (error) {
       logger.error('[EDIT_FORM_Error]', error)
     }
@@ -89,6 +94,7 @@ export class PostsController {
       }
 
       await postsService.createPost(newPostData)
+      form.reset()
     } catch (error) {
       console.error('[NEW POST]', error.message)
     }

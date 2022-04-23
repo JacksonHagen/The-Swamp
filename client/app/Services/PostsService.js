@@ -5,6 +5,7 @@ import { api } from './AxiosService.js'
 
 class PostsService {
   async edit(formData) {
+    debugger
     const post = ProxyState.activePost
     await api.put('api/posts/' + post.id, formData)
     post.title = formData.title
