@@ -4,6 +4,12 @@ import { logger } from '../Utils/Logger.js'
 import { api } from './AxiosService.js'
 
 class PostsService {
+  async remove(postId) {
+    const res = await api.delete('api/posts/' + postId)
+    logger.log(res.data)
+    ProxyState.posts = ProxyState.posts.filter(p => p.id !== postId)
+  }
+
   async vote(postId, userVote) {
     const res = await api.post('api/posts/' + postId + '/vote', { userVote })
     logger.log(res.data)

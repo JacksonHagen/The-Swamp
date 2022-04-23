@@ -35,7 +35,6 @@ export class PostsController {
 
   async setActivePost(postId) {
     try {
-      debugger
       postsService.setActivePost(postId)
       commentsService.getCommentsByPostId(ProxyState.activePost.id)
     } catch (error) {
@@ -49,6 +48,18 @@ export class PostsController {
     } catch (error) {
       logger.error(error)
     }
+  }
+
+  async remove(postId) {
+    try {
+      postsService.remove(postId)
+    } catch (error) {
+      logger.error('[REMOVAL_ERROR]', error)
+    }
+  }
+
+  async edit(postId) {
+
   }
 
   async newPost() {
