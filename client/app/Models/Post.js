@@ -13,7 +13,7 @@ export class Post {
     return /* html */`
     <div class="row justify-content-center my-5">
       <div class="col-md-8">
-      <div class="card w-100 p-5">
+      <div class="card w-100 p-5 bg-primary">
         <h5 class="card-title mb-4 selectable fit p-2 rounded" onclick="app.postsController.setActivePost('${this.id}')">${this.title}</h5>
           <img src="${this.imageUrl}" class="card-img-top img-fit" alt="...">
           <div class="card-body">
@@ -21,7 +21,7 @@ export class Post {
             <button class="btn btn-primary" onclick="app.postsController.vote('${this.id}', true)">Uplayer</button>
             <button class="btn btn-warning" onclick="app.postsController.vote('${this.id}', false)">Downlayer</button>
             <button class="btn btn-primary" onclick="app.postsController.edit('${this.id}')">Edit</button>
-            <button class="btn btn-warning" onclick="app.postsController.remove('${this.id}')">Remove</button>
+            <button class="btn btn-danger" onclick="app.postsController.remove('${this.id}')">Remove</button>
           </div>
         </div>
       </div>
