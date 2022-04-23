@@ -66,5 +66,4 @@ export class PostsLayersController extends BaseController
            next(error);
        }
     }
-
 }

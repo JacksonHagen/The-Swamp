@@ -8,6 +8,7 @@ export class CommentsController extends BaseController {
     super('api/comments')
 
     this.router
+      .get("/:id/score", this.getCommentScore)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.create)
       .post('/:id/vote', this.vote)
@@ -44,9 +45,23 @@ export class CommentsController extends BaseController {
 
   async vote(req, res, next) {
     try {
+        req.body.commentId = req.params.id
+        req.body.accountId = req.userInfo.id
       return res.send(await commentsLayersService.create(req.body))
     } catch (error) {
       next(error)
     }
+  }
+
+  async getCommentScore(req, res, next)
+  {
+      try
+      {
+          return res.send(commentsLayersService.getCommentScore(req.params.id));
+      }
+      catch(error)
+      {
+          next(error);
+      }
   }
 }
