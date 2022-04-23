@@ -47,7 +47,7 @@ export class CommentsController extends BaseController {
     try {
         req.body.commentId = req.params.id
         req.body.accountId = req.userInfo.id
-      return res.send(await commentsLayersService.create(req.body))
+      return res.send(await commentsLayersService.createOrEdit(req.body))
     } catch (error) {
       next(error)
     }

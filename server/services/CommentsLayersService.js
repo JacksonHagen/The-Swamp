@@ -14,23 +14,23 @@ class CommentsLayersService {
         return await dbContext.CommentLayers.find({query})
     }
 
-    async create(body)
+    async createOrEdit(body)
     {
-        return await dbContext.CommentLayers.create(body)
-    }
-
-    async edit(update)
-    {
-        const edited = this.getById(update.id)
-        if(edited.accountId.toString() !== update.accountId)
+        const found = await dbContext.CommentLayers.findOne({ accountId: body.accountId, commentId: body.commentId })
+        if(!found)
+        {
+            const created = await dbContext.CommentLayers.create(body)
+            return created
+        }
+        if(found.accountId.toString() !== body.accountId)
         {
             throw new Forbidden(`You don't have permission for this CommentLayer`)
         }
 
         // NOTE have to check like this because it's a bool, so just checking against it would skip it if it was false
-        edited.userVote = typeof update.userVote == "boolean" ? update.userVote : edited.userVote
-        edited.save()
-        return edited
+        found.userVote = typeof body.userVote == "boolean" ? body.userVote : found.upvoted
+        await found.save()
+        return found
     }
 
     async remove(id, userId)
@@ -44,9 +44,9 @@ class CommentsLayersService {
         return removed
     }
 
-    async getPostScore(commentId)
+    async getCommentScore(commentId)
     {
-        const votes = await this.getAll({ postId: commentId });
+        const votes = await this.getAll({ commentId: commentId });
         let score = votes.length;
         score += votes.filter(vote => vote.userVote).length * 2
         return score

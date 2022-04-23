@@ -79,9 +79,9 @@ export class PostsController extends BaseController {
   async vote(req, res, next)
   {
     try {
-        req.body.commentId = req.params.id
+        req.body.postId = req.params.id
         req.body.accountId = req.userInfo.id
-      return res.send(await postsLayersService.create(req.body))
+      return res.send(await postsLayersService.createOrEdit(req.body))
     } catch (error) {
       next(error)
     }
@@ -91,7 +91,7 @@ export class PostsController extends BaseController {
   {
       try
       {
-          return res.send(postsLayersService.getPostScore(req.params.id));
+          return res.send({score:await postsLayersService.getPostScore(req.params.id)});
       }
       catch(error)
       {

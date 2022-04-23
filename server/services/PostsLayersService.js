@@ -5,10 +5,10 @@ class PostsLayersService
 {
     async getById(id)
     {
-        const found = await dbContext.PostLayers.findById(update.id)
+        const found = await dbContext.PostLayers.findById(id)
         if(!found)
         {
-            throw new BadRequest(`PostLayer with id ${update.id} not found`)
+            throw new BadRequest(`PostLayer with id ${id} not found`)
         }
         return found
     }
@@ -20,26 +20,32 @@ class PostsLayersService
 
     async create(body)
     {
-        return await dbContext.PostLayers.create(body)
+        const created = await dbContext.PostLayers.create(body)
+        return created
     }
 
-    async edit(update)
+    async createOrEdit(body)
     {
-        const edited = this.getById(update.id)
-        if(edited.accountId.toString() !== update.accountId)
+        const found = await dbContext.PostLayers.findOne({ accountId: body.accountId, postId: body.postId })
+        if(!found)
+        {
+            const created = await dbContext.PostLayers.create(body)
+            return created
+        }
+        if(found.accountId.toString() !== body.accountId)
         {
             throw new Forbidden(`You don't have permission for this PostLayer`)
         }
 
         // NOTE have to check like this because it's a bool, so just checking against it would skip it if it was false
-        edited.userVote = typeof update.userVote == "boolean" ? update.userVote : edited.upvoted
-        edited.save()
-        return edited
+        found.userVote = typeof body.userVote == "boolean" ? body.userVote : found.upvoted
+        await found.save()
+        return found
     }
 
     async remove(id, userId)
     {
-        const removed = this.getById(id)
+        const removed = await this.getById(id)
         if(removed.accountId.toString() !== userId)
         {
             throw new Forbidden(`You don't have permission for this PostLayer`)
@@ -52,7 +58,7 @@ class PostsLayersService
     {
         const votes = await this.getAll({ postId });
         let score = votes.length;
-        score += votes.filter(vote => vote.userVote).length * 2
+        score -= votes.filter(vote => !vote.userVote).length * 2
         return score
     }
 }
