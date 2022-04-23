@@ -47,6 +47,14 @@ class PostsLayersService
         removed.remove()
         return removed
     }
+
+    async getPostScore(postId)
+    {
+        const votes = await this.getAll({ postId });
+        let score = votes.length;
+        score += votes.filter(vote => vote.upvoted).length * 2
+        return score
+    }
 }
 
 export const postsLayersService = new PostsLayersService();

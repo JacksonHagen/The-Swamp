@@ -1,5 +1,6 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { commentsService } from '../services/CommentsService.js'
+import { postsLayersService } from '../services/PostsLayersService.js'
 import { postsService } from '../services/PostsService.js'
 import BaseController from '../utils/BaseController.js'
 
@@ -9,6 +10,7 @@ export class PostsController extends BaseController {
     this.router
       .get('', this.getAll)
       .get('/:id', this.getById)
+      .get('/:id/score', this.getPostScore)
       .get('/:id/comments', this.getCommentsByPostId)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.create)
@@ -72,5 +74,17 @@ export class PostsController extends BaseController {
     } catch (error) {
       next(error)
     }
+  }
+
+  async getPostScore(req, res, next)
+  {
+      try
+      {
+          return res.send(postsLayersService.getPostScore(req.params.id));
+      }
+      catch(error)
+      {
+          next(error);
+      }
   }
 }
