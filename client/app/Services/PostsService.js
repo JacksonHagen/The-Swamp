@@ -16,13 +16,12 @@ class PostsService {
   }
 
   setActivePost(postId) {
-    ProxyState.activePost = ProxyState.posts.find(post => post.postId === postId)
+    ProxyState.activePost = ProxyState.posts.find(post => post.id === postId)
   }
 
-  async createPost(newPostData)
-  {
-    const res = await api.post("api/posts", newPostData);
-    ProxyState.posts = [new Post(res.data), ...ProxyState.posts];
+  async createPost(newPostData) {
+    const res = await api.post('api/posts', newPostData)
+    ProxyState.posts = [new Post(res.data), ...ProxyState.posts]
   }
 }
 

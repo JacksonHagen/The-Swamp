@@ -21,6 +21,7 @@ export class PostsController {
   constructor() {
     ProxyState.on('posts', _drawPosts)
     ProxyState.on('activePost', _drawActivePost)
+    this.getAllPosts()
     _drawPosts()
   }
 
@@ -34,8 +35,9 @@ export class PostsController {
 
   async setActivePost(postId) {
     try {
+      debugger
       postsService.setActivePost(postId)
-      commentsService.getCommentsByPostId(ProxyState.activePost.postId)
+      commentsService.getCommentsByPostId(ProxyState.activePost.id)
     } catch (error) {
       logger.error('[SET ACTIVE POST]' + error.message)
     }
