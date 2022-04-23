@@ -15,7 +15,7 @@ export class Post {
       <div class="col-md-8">
       <div class="card w-100 p-5">
         <h5 class="card-title mb-4 selectable fit p-2 rounded" onclick="app.postsController.setActivePost('${this.id}')">${this.title}</h5>
-          <img src="https://cdn.vox-cdn.com/thumbor/iHYQCXZLUPAx3wLetkUI9H4gS_U=/108x4:1300x700/1400x933/filters:focal(580x237:804x461):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/68509203/the_dark_knight_shrek.0.jpg" class="card-img-top img-fit" alt="...">
+          <img src="${this.imageUrl}" class="card-img-top img-fit" alt="...">
           <div class="card-body">
             <p class="card-text">${this.body}</p>
             <button class="btn btn-primary" onclick="app.postsController.vote(${this.id}, true)">Uplayer</button>

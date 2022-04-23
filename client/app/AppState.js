@@ -13,7 +13,7 @@ class AppState extends EventEmitter {
   /** @type {import('./Models/User').User[]} */
   users = []
   /** @type {import('./Models/Post').Post[]} */
-  posts = [post1]
+  posts = []
 
   activePost = null;
 
