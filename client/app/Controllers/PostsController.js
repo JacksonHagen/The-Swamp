@@ -53,11 +53,11 @@ export class PostsController {
 
   async remove(postId) {
     try {
-      postsService.remove(postId)
+      await postsService.remove(postId)
     } catch (error) {
       const audio = new Audio('../assets/swampAudio.mp3')
       audio.play()
-      Pop.toast('WHAT ARE YEOU DOIN IN ME SWAMP', 'error', 'center')
+      Pop.toast('WHAT ARE YEOU DOIN IN ME SWAMP', 'error', 'center', 5300)
       logger.error('[REMOVAL_ERROR]', error)
     }
   }
@@ -85,7 +85,7 @@ export class PostsController {
     } catch (error) {
       const audio = new Audio('../assets/swampAudio.mp3')
       audio.play()
-      Pop.toast('WHAT ARE YEOU DOIN IN ME SWAMP', 'error', 'center')
+      Pop.toast('WHAT ARE YEOU DOIN IN ME SWAMP', 'error', 'center', 5300)
       logger.error('[EDIT_FORM_Error]', error)
     }
   }
