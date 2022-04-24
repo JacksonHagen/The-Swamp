@@ -3,7 +3,7 @@ import { BadRequest, Forbidden } from '../utils/Errors.js'
 
 class CommentsService {
   async create(body) {
-    return await dbContext.Comments.create(body)
+    return await dbContext.Comments.create(body).populate("account", "name picture")
   }
 
   async edit(update) {
@@ -15,7 +15,8 @@ class CommentsService {
       throw new Forbidden('What are you doing in me swamp!?')
     }
     original.body = update.body
-    original.update()
+    original.save()
+    original.populate("account", "name picture").populate("upvotes downvotes")
     return original
   }
 
@@ -33,7 +34,7 @@ class CommentsService {
 
   async getByPostId(postId)
   {
-      const found = await dbContext.Comments.find({postId: postId}).populate("account", "name picture")
+      const found = await dbContext.Comments.find({postId: postId}).populate("account", "name picture").populate("upvotes downvotes")
       return found
   }
 }

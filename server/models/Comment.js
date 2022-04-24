@@ -31,12 +31,22 @@ CommentSchema.virtual('post',
   }
 )
 
-// TODO figure out how to only populate the votes the user has made on this comment
-CommentSchema.virtual("info", 
+CommentSchema.virtual("upvotes",
     {
-        localField: "",
-        ref: "CommentLayer",
-        foreignField: "",
-        justOne: true
+        localField: '_id',
+        foreignField: 'commentId',
+        ref: 'PostLayer',
+        count: true,
+        match: { userVote: true }
+    }
+)
+
+CommentSchema.virtual("downvotes",
+    {
+        localField: '_id',
+        foreignField: 'commentId',
+        ref: 'PostLayer',
+        count: true,
+        match: { userVote: false }
     }
 )

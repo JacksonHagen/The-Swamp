@@ -21,3 +21,23 @@ PostSchema.virtual('account',
     ref: 'Account',
     justOne: true
   })
+
+PostSchema.virtual("upvotes",
+    {
+        localField: '_id',
+        foreignField: 'postId',
+        ref: 'PostLayer',
+        count: true,
+        match: { userVote: true }
+    }
+)
+
+PostSchema.virtual("downvotes",
+    {
+        localField: '_id',
+        foreignField: 'postId',
+        ref: 'PostLayer',
+        count: true,
+        match: { userVote: false }
+    }
+)
