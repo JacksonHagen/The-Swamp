@@ -25,12 +25,15 @@ class PostsService {
   async vote(postId, userVote) {
     const res = await api.post('api/posts/' + postId + '/vote', { userVote })
     logger.log(res.data)
+    const votedPost = await api.get('api/posts/' + postId)
+    ProxyState.posts.find(post => post.id === postId).score = new Post(votedPost.data).score
+    ProxyState.posts = ProxyState.posts
   }
 
   async getAllPosts() {
     const res = await api.get('api/posts')
     logger.log(res.data)
-    ProxyState.posts = res.data.map(p => new Post(p))
+    ProxyState.posts = res.data.map(p => new Post(p)).sort((a, b) => (b.score - a.score))
   }
 
   setActivePost(postId) {
