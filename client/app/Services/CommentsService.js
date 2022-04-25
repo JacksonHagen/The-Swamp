@@ -4,6 +4,12 @@ import { ProxyState } from '../AppState.js'
 import { Comment } from '../Models/Comment.js'
 
 class CommentsService {
+    async addComment(postId, body)
+    {
+        const res = await api.post("api/comments/", { postId, body })
+        ProxyState.comments = [new Comment(res.data), ...ProxyState.comments]
+    }
+
   async remove(id) {
     await api.delete('api/comments/' + id)
     ProxyState.comments = ProxyState.comments.filter(c => c.id !== id)

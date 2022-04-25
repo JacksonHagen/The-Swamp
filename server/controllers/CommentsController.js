@@ -37,7 +37,7 @@ export class CommentsController extends BaseController {
 
   async remove(req, res, next) {
     try {
-      return res.send(commentsService.remove(req.params.id, req.userInfo.id))
+      return await res.send(commentsService.remove(req.params.id, req.userInfo.id))
     } catch (error) {
       next(error)
     }

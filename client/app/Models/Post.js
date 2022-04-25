@@ -8,6 +8,7 @@ export class Post {
     this.accountId = data.accountId
     this.id = data.id
     this.score = data.upvotes - data.downvotes
+    this.account = data.account
   }
 
   get Template() {
@@ -15,9 +16,13 @@ export class Post {
     <div class="row justify-content-center my-5">
       <div class="col-md-8">
       <div class="card w-100 p-5 bg-primary">
-        <div class="d-flex justify-content-between">
-            <h5 class="card-title mb-4 selectable fit p-2 rounded" onclick="app.postsController.setActivePost('${this.id}')">${this.title}</h5>
+        <div class="d-flex justify-content-between selectable" onclick="app.postsController.setActivePost('${this.id}')">
+            <h5 class="card-title mb-4 fit p-2 rounded">${this.title}</h5>
             <h5>${this.score}</h5>
+        </div>
+        <div class="d-flex mb-1">
+            <img style="height: 24px; object-fit: contain" src="${this.account.picture}">
+            <h5 class="ms-2">${this.account.name}</h5>
         </div>
           <img src="${this.imageUrl}" class="card-img-top img-fit" alt="...">
           <div class="card-body">

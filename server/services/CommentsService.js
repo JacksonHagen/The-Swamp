@@ -20,12 +20,12 @@ class CommentsService {
     return original
   }
 
-  async remove(id, userId) {
+  async remove(id, accountId) {
     const comment = await dbContext.Comments.findById(id)
     if (!comment) {
       throw new BadRequest('No comment with that ID was found.')
     }
-    if (comment.userId.toString() !== userId) {
+    if (comment.accountId.toString() !== accountId) {
       throw new Forbidden('What are you doing in me swamp!?')
     }
     await dbContext.Comments.findByIdAndDelete(id)

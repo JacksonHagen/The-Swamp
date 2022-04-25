@@ -14,6 +14,21 @@ export class CommentsController {
     ProxyState.on('comments', _drawActiveComments)
   }
 
+  async addComment(postId)
+  {
+      try
+      {
+          window.event.preventDefault()
+          const form = window.event.target
+          await commentsService.addComment(ProxyState.activePost.id, form.comment.value)
+          form.reset()
+      }
+      catch(error)
+      {
+          logger.error("[ADD COMMENT ERROR]", error.message);
+      }
+  }
+
   async vote(id, userVote) {
     try {
       commentsService.vote(id, userVote)
@@ -32,7 +47,7 @@ export class CommentsController {
 
   async remove(id) {
     try {
-      commentsService.remove(id)
+      await commentsService.remove(id)
     } catch (error) {
       logger.error(error)
     }

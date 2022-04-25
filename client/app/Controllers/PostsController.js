@@ -38,6 +38,9 @@ export class PostsController {
     try {
       postsService.setActivePost(postId)
       commentsService.getCommentsByPostId(ProxyState.activePost.id)
+      document.getElementById("active-post-title").innerText = ProxyState.activePost.title
+      document.getElementById("active-post-body").innerText = ProxyState.activePost.body
+      bootstrap.Modal.getOrCreateInstance(document.getElementById("active-post-modal")).show()
     } catch (error) {
       logger.error('[SET ACTIVE POST]' + error.message)
     }

@@ -39,7 +39,7 @@
 
   </main>
 
-  <div class="modal" tabindex="-1">
+  <div class="modal" tabindex="-1" id="active-post-modal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -48,7 +48,13 @@
         </div>
         <div class="modal-body">
           <div id="active-post-body"></div>
+          <hr>
+          <h4>Comments</h4>
           <div id="active-post-comments"></div>
+          <form onsubmit="app.commentsController.addComment()">
+            <input type="text" placeholder="new comment" id="comment" name="comment">
+            <button class="btn btn-primary">Add Comment</button>
+        </form>
         </div>
       </div>
     </div>
